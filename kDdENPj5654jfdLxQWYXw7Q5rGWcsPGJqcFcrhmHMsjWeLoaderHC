@@ -1,0 +1,80 @@
+local VU = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   VU:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(0.5)
+   VU:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+print("AntiAFK Activated")
+
+----
+
+-- Made by RIP#6666
+_G.Settings = {
+    Players = {
+        ["Ignore Me"] = false, -- Ignore your Character
+        ["Ignore Others"] = false -- Ignore other Characters
+    },
+    Meshes = {
+        Destroy = true, -- Destroy Meshes
+        LowDetail = false -- Low detail meshes (NOT SURE IT DOES ANYTHING)
+    },
+    Images = {
+        Invisible = true, -- Invisible Images
+        LowDetail = false, -- Low detail images (NOT SURE IT DOES ANYTHING)
+        Destroy = true, -- Destroy Images
+    },
+    ["No Particles"] = true, -- Disables all ParticleEmitter, Trail, Smoke, Fire and Sparkles
+    ["No Camera Effects"] = true, -- Disables all PostEffect's (Camera/Lighting Effects)
+    ["No Explosions"] = true, -- Makes Explosion's invisible
+    ["No Clothes"] = true, -- Removes Clothing from the game
+    ["Low Water Graphics"] = true, -- Removes Water Quality
+    ["No Shadows"] = true, -- Remove Shadows
+    ["Low Rendering"] = true, -- Lower Rendering
+    ["Low Quality Parts"] = true -- Lower quality parts
+}
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/FPSBooster.lua"))()
+
+----
+
+local VirtualUser = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:Connect(function()
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
+    wait(0.5) -- Adjust this if necessary
+end)
+print("AntiAFK Activated 2")
+
+
+local timer = 495
+
+local PlaceID = game.PlaceId
+local Min_To_Sec = timer * 60
+local Sec_To_Min = timer / 60
+
+print("Auto Rejoin by Developer#7369")
+print("---")
+if PlaceID == 5591597781 then
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DEVIX7/Script/main/dkwzFAVujM42WX5QVC4gDUtXRpM5IFFkfKQWmZwxHardcoreFan30gems", true))() 
+wait(2.5) 
+print("Teleport to the lobby after " .. timer .. " sec")
+print("---")
+    wait(10)
+    wait(timer)
+    warn("Teleport to the lobby")
+print("---")
+    wait(0.1)
+game:GetService("TeleportService"):Teleport(3260590327, LocalPlayer)
+
+elseif PlaceID == 3260590327 then
+    
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DEVIX7/Script/main/dkwzFAVujM42WX5QVC4gDUtXRpM5IFFkfKQWmZwxHardcoreFan30gems", true))() 
+wait(2.5)
+print("Automatic reconnection after 8.5 minutes")
+print("---")
+    wait(495)
+    warn("Lobby reconnect")
+print("---")
+    wait(0.1)
+game:GetService("TeleportService"):Teleport(3260590327, LocalPlayer)
+end
