@@ -1,0 +1,77 @@
+--Note: do not write additional time, the script did it for you
+--Note 2: script put in AutoExec
+--local strattimer = 470 -- Strategy completion time in seconds ( https://www.google.com/search?q=minutes+to+seconds )
+
+--variables (do not touch)
+local PlaceID = game.PlaceId
+local delay15sec = strattimer + 15 --additional 15 sec delay
+local Sec_To_Min = delay15sec / 60
+local TeleportService = game:GetService("TeleportService")
+local plr = game.Players.LocalPlayer
+local lobbyId = 3260590327
+local gameId = 5591597781
+
+local function checkGameLoaded()
+    local isLoaded = game:IsLoaded()
+
+    if isLoaded then
+        print("Game Loaded Status : True")
+    else
+        print("Game Loaded Status : False")
+        wait(0.1)
+        checkGameLoaded()
+    end
+end
+
+checkGameLoaded()
+
+local function lobbytp()
+    TeleportService:Teleport(lobbyId, plr)
+    wait(0.01)
+    TeleportService:Teleport(lobbyId, plr)
+    wait(0.01)
+    TeleportService:Teleport(lobbyId, plr)
+    wait(0.5)
+        warn("tp error, retrying...")
+    lobbytp()
+end
+
+--anti afk
+local VU = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   VU:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(0.1)
+   VU:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+print("Script by Developer#7369")
+warn("Script by Developer#7369")
+print("Script by Developer#7369")
+warn("Script by Developer#7369")
+print("Script by Developer#7369")
+warn("Script by Developer#7369")
+
+--back to lobby
+if PlaceID == gameId then
+        print("Script Loaded")
+    wait(10.1) --can be changed to 0.5
+        print("Teleport to the lobby after " .. Sec_To_Min .. " minutes")
+        --getgenv().output('Script by Developer#7369',Color3.fromRGB(0, 251, 255)) --can be deleted
+        --getgenv().output('Teleport to the lobby after ' .. Sec_To_Min .. ' minutes',Color3.fromRGB(0, 255, 145)) --can be deleted
+        print("Script Loaded 2")
+    wait(delay15sec)
+        warn("Teleporting to the lobby...")
+        getgenv().output('Teleporting to the lobby...',Color3.fromRGB(212, 255, 0)) --can be deleted
+    wait(0.1)
+    lobbytp()
+
+--auto lobby rejoin
+elseif PlaceID == lobbyId then
+        print("Script Loaded")
+    wait(0.5)
+        print("Automatic reconnection after 10 minutes")
+    wait(600) --10 min wait in lobby
+        print("Rejoining lobby...")
+    lobbytp()
+end
+--🇺🇦
