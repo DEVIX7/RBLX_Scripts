@@ -51,6 +51,8 @@ warn("Script by Developer#7369")
 print("Script by Developer#7369")
 warn("Script by Developer#7369")
 
+print("Timer Value : " .. strattimer .. " sec")
+
 --back to lobby
 if PlaceID == gameId then
         print("Script Loaded")
