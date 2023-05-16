@@ -1,6 +1,7 @@
 --Note: do not write additional time, the script did it for you
 --Note 2: script put in AutoExec
---local strattimer = 470 -- Strategy completion time in seconds ( https://www.google.com/search?q=minutes+to+seconds )
+--getgenv().strattimer = 900 -- use this option
+--local strattimer = 900 -- Strategy completion time in seconds ( https://www.google.com/search?q=minutes+to+seconds )
 
 --variables (do not touch)
 local PlaceID = game.PlaceId
