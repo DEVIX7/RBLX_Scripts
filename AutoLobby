@@ -9,18 +9,16 @@ local plr = game.Players.LocalPlayer
 local gameId = 5591597781
 local lobbyId = 3260590327
 
-print("Game loaded")
-
 print("github.com/devix7")
 
-if game.PlaceId == gameId then
-	local gameOver = plr.PlayerGui:WaitForChild("RoactGame").Rewards.content.gameOver
-
-	local function tpLobby()
+    local function tpLobby()
 		print("Teleporting to the lobby...")
 		wait(1)
 		game:GetService("TeleportService"):Teleport(lobbyId)
 	end
+
+if game.PlaceId == gameId then
+	local gameOver = plr.PlayerGui:WaitForChild("RoactGame").Rewards.content.gameOver
 
 	gameOver:GetPropertyChangedSignal("Visible"):Connect(function()
 		if gameOver.Visible then
@@ -28,7 +26,7 @@ if game.PlaceId == gameId then
 		end
 	end)
 elseif game.PlaceId == lobbyId then
-	print("Automatic reconnection after 10 minutes")
+    print("Automatic reconnection after 10 minutes")
 	wait(600)
 	tpLobby()
 end
