@@ -8,13 +8,13 @@ function say(TitleText, MessageText, DelayVis)
 	if DelayVis == nil or DelayVis == "" then
 		DelayVis = 10
 	end
-	local Notifications = UI:GetChildren()
+	local Notifications = UI.Notifs:GetChildren()
 	--[[for i,v in pairs(Notifications) do
 		v:TweenPosition(UDim2.new(0.97, 0, v.Position.Y.Scale - 0.12, 0),"InOut","Quad",0.2,true)
 	end]]
 	local NewNotification = UI.MainFrame:Clone()
-	NewNotification.Name = tostring(#Notifications + 1)
 	NewNotification.Parent = UI.Notifs
+	NewNotification.Name = tostring(#Notifications + 1)
 	NewNotification.Title.Text = TitleText
 	NewNotification.Message.Text = MessageText
 	NewNotification.Visible = true
