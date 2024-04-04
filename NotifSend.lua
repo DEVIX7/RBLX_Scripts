@@ -2,6 +2,7 @@ if game.CoreGui:FindFirstChild("NotifiUi_devix7") then
 	warn("Already loaded gui!")
 else
 loadstring(game:HttpGet("https://raw.githubusercontent.com/DEVIX7/RBLX_Scripts/master/NotifUI.lua",true))()
+	wait(2)
 end
 local UI = game.CoreGui.NotifiUi_devix7
 function say(TitleText, MessageText, DelayVis)
