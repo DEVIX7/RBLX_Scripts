@@ -1,5 +1,6 @@
 --[[BACKUP ; SCRIPT MADE BY Money Maker]]
-loadstring(game:HttpGet("https://raw.githubusercontent.com/wxzex/mmsautostratcontinuation/main/justincase/sjkdkjlfdjnnmklcvxjNotifCr"))()
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/wxzex/mmsautostratcontinuation/main/justincase/sjkdkjlfdjnnmklcvxjNotifCr"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DEVIX7/RBLX_Scripts/master/NotifSend.lua",true))()
 say("SCRIPT", "Made by Money Maker")
 getgenv().breaks = false
 local cc = 0
