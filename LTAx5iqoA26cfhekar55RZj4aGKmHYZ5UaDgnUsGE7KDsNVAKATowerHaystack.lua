@@ -1,6 +1,6 @@
 --[[ 
 	Stack V1 
-  made by DEVIX7 
+	made by DEVIX7 
 ]]
 local StrToNumber = tonumber;
 local Byte = string.byte;
