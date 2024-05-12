@@ -31,3 +31,6 @@ elseif Age >= 25 and Age < 70 then
 end
 local info = Age .. " " .. tostring(ActivAccess)
 print(info)
+--random
+local a22 = 15
+print(a22)
