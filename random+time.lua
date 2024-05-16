@@ -33,4 +33,4 @@ local info = Age .. " " .. tostring(ActivAccess)
 print(info)
 --random
 local a22 = 15
-print(a22)
+print(a22+b1-b2)
