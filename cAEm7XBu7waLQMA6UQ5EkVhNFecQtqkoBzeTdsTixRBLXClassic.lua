@@ -1,1 +1,29 @@
-local var1 = game:GetService("Players") --[[made by devix7]] local var2 = var1.LocalPlayer --[[made by devix7]] local var3 = var2.Character or var2.CharacterAdded:Wait() --[[made by devix7]] local var4 = Instance.new("Hint", game.CoreGui) var4.Text = "made my devix7" --[[made by devix7]] task.wait(1) --[[made by devix7]] local function func1() --[[made by devix7]] local var5 = workspace:WaitForChild("ClassicEventCurrencies") --[[made by devix7]] local var6 = #var5:GetChildren() --[[made by devix7]] var4.Text = "Tix:" .. var6 if var6 == 0 then --[[made by devix7]] var4.Text = "Tix not found!!!" --[[made by devix7]] task.wait(0.5) --[[made by devix7]] var4.Text = "Destroying script" --[[made by devix7]] task.wait(0.5) --[[made by devix7]] var4:Destroy() --[[made by devix7]] end --[[made by devix7]] for _, var7 in ipairs(var5:GetChildren()) do --[[made by devix7]] local var8 = var7.CFrame + Vector3.new(0, 5, 0) --[[made by devix7]] var3:SetPrimaryPartCFrame(var8) --[[made by devix7]] task.wait(3) end --[[made by devix7]] end --[[made by devix7]] func1() --[[made by devix7]]
+--[[
+  Auto collector tix V1.1
+  made by devix7
+]]--
+local var1 = game:GetService("Players");local var2 = var1.LocalPlayer;local var3 = var2.Character or var2.CharacterAdded:Wait();
+local var4 = Instance.new("Hint", game.CoreGui);var4.Text = "made by devix7";task.wait(1);
+local function func1()
+    local var5
+    if game.PlaceId == 5591597781 then
+        var5 = workspace.Map.Environment:FindFirstChild("Currency_Tix")
+        if not var5 then
+            var4.Text = "Tix not found!!!";task.wait(0.5);var4.Text = "Destroying script!!!";task.wait(0.5);var4:Destroy();
+            return
+        end
+        var3:SetPrimaryPartCFrame(var5.CFrame + Vector3.new(0, 5, 0))
+    else
+        var5 = workspace:WaitForChild("ClassicEventCurrencies")
+        local var6 = #var5:GetChildren()
+        if var6 == 0 then
+            var4.Text = "Tix not found!!!";task.wait(0.5);var4.Text = "Destroying script!!!";task.wait(0.5);var4:Destroy();
+            return
+        end
+        var4.Text = "Tix:" .. var6
+        for _, var7 in ipairs(var5:GetChildren()) do
+            var3:SetPrimaryPartCFrame(var7.CFrame + Vector3.new(0, 5, 0));task.wait(3);
+        end
+    end
+end
+func1()
