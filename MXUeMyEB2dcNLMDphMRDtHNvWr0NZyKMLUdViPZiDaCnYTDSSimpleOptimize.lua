@@ -1,12 +1,27 @@
 repeat
     task.wait()
 until game:IsLoaded()
-print("made by devix7","github.com/devix7")
+print("made by devix7", "github.com/devix7")
+local Lighting = game:GetService("Lighting")
+local function delLight()
+    for _, lightobj in pairs(Lighting:GetDescendants()) do
+        lightobj:Destroy()
+    end
+end
+local function fullbright()
+    Lighting.Brightness = 2
+    Lighting.ClockTime = 14
+    Lighting.FogEnd = 100000
+    Lighting.GlobalShadows = false
+    Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+end
 if game.PlaceId == 5591597781 then
     repeat
         task.wait()
     until game:GetService("Workspace"):FindFirstChild("Map")
     game:GetService("Workspace"):FindFirstChild("Map"):Destroy()
+    delLight()
+    fullbright()
 end
 if game.PlaceId == 3260590327 then
     local keepObjectNames = {"Center2", "Type", "SpawnLocation", "Elevators", "Terrain", "Camera"}
@@ -24,7 +39,15 @@ if game.PlaceId == 3260590327 then
     repeat
         task.wait()
     until allKeepObjectsExist()
-    local keepObjects = {game:GetService("Workspace").Center2, game:GetService("Workspace").Type, game:GetService("Workspace").SpawnLocation, game:GetService("Workspace").Elevators, game:GetService("Workspace").Terrain, game:GetService("Workspace").Camera, game:GetService("Players").LocalPlayer.Character}
+    local keepObjects = {
+        game:GetService("Workspace").Center2,
+        game:GetService("Workspace").Type,
+        game:GetService("Workspace").SpawnLocation,
+        game:GetService("Workspace").Elevators,
+        game:GetService("Workspace").Terrain,
+        game:GetService("Workspace").Camera,
+        game:GetService("Players").LocalPlayer.Character
+    }
     local function shouldKeep(obj)
         for _, keepObj in ipairs(keepObjects) do
             if obj == keepObj then
@@ -38,4 +61,6 @@ if game.PlaceId == 3260590327 then
             obj:Destroy()
         end
     end
+    delLight()
+    fullbright()
 end
