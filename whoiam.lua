@@ -1,14 +1,14 @@
---[[ made by devix7 ; whoaim.lua ; script use UNC format for detect ]]
+--[[ made by devix7 ; whoiam.lua ; script use UNC format for detect ]]
 print("made by devix7")
-local whoami = nil
+local whoiam = nil
     local name = identifyexecutor() or getexecutorname()
     local lvl = getthreadidentity() or getidentity()
 if name and lvl then
-whoami = "---\nExecutor: " .. tostring(name) .. "\nLevel: " .. tostring(lvl) .. "\n---"
+whoiam = "---\nExecutor: " .. tostring(name) .. "\nLevel: " .. tostring(lvl) .. "\n---"
 if whoami ~= nil then
-        print(whoami)
+        print(whoiam)
         local ui = Instance.new("Message" ,game.CoreGui)
-            ui.Text = whoami
+            ui.Text = whoiam
             task.wait(3)
             ui:Destroy()
     end
