@@ -1,6 +1,4 @@
-repeat
-    task.wait()
-until game:IsLoaded()
+repeat task.wait() until game:IsLoaded()
 print("made by devix7", "github.com/devix7")
 local Lighting = game:GetService("Lighting")
 local function delLight()
@@ -17,13 +15,17 @@ local function fullbright()
 end
 if game.PlaceId == 5591597781 then
     repeat
+        local map = game:GetService("ReplicatedStorage").State.Map
+        task.wait()
+    until map and map ~= ""
+    task.wait(.5)
+    repeat
         task.wait()
     until game:GetService("Workspace"):FindFirstChild("Map")
     game:GetService("Workspace"):FindFirstChild("Map"):Destroy()
     delLight()
     fullbright()
-end
-if game.PlaceId == 3260590327 then
+elseif game.PlaceId == 3260590327 then
     local keepObjectNames = {"Center2", "Type", "SpawnLocation", "Elevators", "Terrain", "Camera"}
     local function allKeepObjectsExist()
         for _, objName in ipairs(keepObjectNames) do
