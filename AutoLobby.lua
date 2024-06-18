@@ -33,7 +33,12 @@ if game.PlaceId == gameId then
     end)
 
 elseif game.PlaceId == lobbyId then
-    print("Automatic reconnection after 10 minutes")
-    wait(600)
+    game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(element)
+        if element.Name == "ErrorPrompt" and element:FindFirstChild("MessageArea") and element.MessageArea:FindFirstChild("ErrorFrame") then
+            tpLobby()
+        end
+    end)
+    print("Automatic reconnection after 5 minutes")
+    wait(300)
     tpLobby()
 end
