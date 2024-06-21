@@ -7,7 +7,7 @@
 repeat task.wait() until game:IsLoaded()
 local plr = game:GetService("Players").LocalPlayer
 print("github.com/DEVIX7")
-function callhost()
+local function callhost()
     local socket = WebSocket.connect("ws://localhost:8126")
     socket:Send("connect-to-vip-server")
 end
@@ -29,6 +29,9 @@ if game.PlaceId == 5591597781 then
     end)
 elseif game.PlaceId == 3260590327 then
     print("lobby")
+    print("reconnecting after 200 seconds")
+    task.wait(200)
+    callhost()
 else
     print("incorrect place")
     hint = Instance.new("Hint",game.CoreGui) hint.Text = "ERR , join to correct place" task.wait(7) hint:Destroy()
