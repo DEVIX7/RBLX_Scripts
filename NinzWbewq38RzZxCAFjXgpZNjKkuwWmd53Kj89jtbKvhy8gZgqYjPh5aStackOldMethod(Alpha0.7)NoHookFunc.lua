@@ -1,9 +1,9 @@
 --[[ 
-   Stack V0.7 (Aplha) source
+   Stack V0.7 (Alpha) source
    made by DEVIX7
 ]]
 local v1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sigmanic/ROBLOX/main/ModificationWallyUi", true))()
-local v2 = v1:CreateWindow("Stack V0.7 (Aplha)")
+local v2 = v1:CreateWindow("Stack V0.7 (Alpha)")
 local v3 = v1:CreateWindow("Beta Plugins")
 local v4 = game:GetService("ReplicatedStorage").RemoteFunction
 local v5 = game.Players.LocalPlayer:GetMouse()
