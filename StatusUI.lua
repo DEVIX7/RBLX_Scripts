@@ -1,9 +1,9 @@
 --[[
-Status UI V1
+Status UI V1.2
 made by devix7
 ]]
 repeat
-	task.wait()
+    task.wait()
 until game:IsLoaded()
 local oldTime = os.clock()
 local gui = Instance.new("ScreenGui")
@@ -47,28 +47,29 @@ text2.Text = "made by devix7"
 text2.TextColor3 = Color3.fromRGB(255, 255, 255)
 text2.TextSize = 24.000
 task.spawn(function()
-	task.wait(1.5)
-	local symbols = { "|", "/", "-", "\\" }
-	while true do
-		for i = 1, #symbols do
-			text2.Text = symbols[i]
-			task.wait(0.15)
-		end
-	end
+    task.wait(1.5)
+    local symbols = {"|", "/", "-", "\\"}
+    while true do
+        for i = 1, #symbols do
+            text2.Text = symbols[i]
+            task.wait(0.15)
+        end
+    end
 end)
-print("Loading time:",os.clock() - oldTime)
-print("\nmade by devix7")
-function setstatus(...)
-	local args = {...}
-	local text = table.concat(args, ", ")
-	local currentTime = os.date("%H:%M:%S")
-	print("[" .. currentTime .. "] Status: " .. text)
-	statusText.Text = "Status: " .. text
-	if text == "guiend" then
-		print("OK. Ui Destroying")
-		statusText.Text = "OK. Ui Destroying"
-		task.wait(1.5)
-		gui:Destroy()
-	end
+print("Loading time:", os.clock() - oldTime)
+print("Status UI V1.2","\nmade by devix7")
+local statusUI = {}
+statusUI.setstatus = function(self, ...)
+    local args = {...}
+    local text = table.concat(args, ", ")
+    local currentTime = os.date("%H:%M:%S")
+    print("[" .. currentTime .. "] Status: " .. text)
+    statusText.Text = "Status: " .. text
+    if text == "guiend" then
+        print("OK. Ui Destroying")
+        statusText.Text = "OK. Ui Destroying"
+        task.wait(1.5)
+        gui:Destroy()
+    end
 end
-return setstatus
+return statusUI
