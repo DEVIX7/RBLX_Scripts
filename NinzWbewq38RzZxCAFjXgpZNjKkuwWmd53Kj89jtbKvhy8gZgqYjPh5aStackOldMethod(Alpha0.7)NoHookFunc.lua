@@ -72,4 +72,21 @@ v2:Button('Place Tower', function()
         end
     end
 end)
+v2:Section('\\/ UPGRADE \\/')
+v2:Button('Upgrade All', function()
+    for a1, a2 in pairs(game.Workspace.Towers:GetChildren()) do
+        if a2:WaitForChild("Owner").Value == game.Players.LocalPlayer.UserId then
+            v4:InvokeServer("Troops", "Upgrade", "Set", {["Troop"] = a2})
+            task.wait()
+        end
+    end
+end)
+v2:Button("Upgrade Towers", function()
+    for a1, a2 in pairs(game.Workspace.Towers:GetChildren()) do
+        if a2:WaitForChild("Owner").Value == game.Players.LocalPlayer.UserId and a2:WaitForChild("TowerReplicator"):GetAttribute("Type") == v10 then
+            v4:InvokeServer("Troops", "Upgrade", "Set", {["Troop"] = a2})
+            task.wait()
+        end
+    end
+end)
 v2:Section('made by DEVIX7')
