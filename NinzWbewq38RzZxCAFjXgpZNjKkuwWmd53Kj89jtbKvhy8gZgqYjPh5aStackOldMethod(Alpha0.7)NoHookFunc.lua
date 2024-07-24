@@ -89,4 +89,13 @@ v2:Button("Upgrade Towers", function()
         end
     end
 end)
+v2:Section('\\/ DANGER ZONE \\/')
+v2:Button('Sell All', function()
+    for a1, a2 in pairs(game.Workspace.Towers:GetChildren()) do
+        if a2:WaitForChild("Owner").Value == game.Players.LocalPlayer.UserId then
+            v4:InvokeServer("Troops", "Sell", {["Troop"] = a2})
+            task.wait()
+        end
+    end
+end)
 v2:Section('made by DEVIX7')
