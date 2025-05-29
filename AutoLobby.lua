@@ -1,48 +1,30 @@
---AutoLobby V2.7
---Script by devix7
-
 repeat task.wait() until game:IsLoaded()
-print("\n\t\tgithub.com/devix7\n", "\t\tmade by DEVIX7\n", "\t\tAutoLobby V2.7")
-
-local function tpLobby()
-    print("Teleporting to the lobby...")
-    task.wait(1)
-    game:GetService("TeleportService"):Teleport(3260590327, game:GetService("Players").LocalPlayer)
-end
-
+print("> autolobby v2.8 \\ by devix7")
 if game.PlaceId == 5591597781 then
     task.spawn(function()
-        local gameOver = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("ReactGame"):WaitForChild("Rewards"):WaitForChild("content"):WaitForChild("gameOver")
-        gameOver:GetPropertyChangedSignal("Visible"):Connect(function()
-            if gameOver.Visible == true then
-                local content = gameOver:FindFirstChild("content")
-                if content and content.Visible == true then
-                    tpLobby()
+        game.Players.LocalPlayer.PlayerGui.ReactGameRewards.Frame.gameOver:GetPropertyChangedSignal("Visible"):Connect(function()
+            if game.Players.LocalPlayer.PlayerGui.ReactGameRewards.Frame.gameOver.Visible == true then
+                if game.Players.LocalPlayer.PlayerGui.ReactGameRewards.Frame.gameOver:FindFirstChild("content") and game.Players.LocalPlayer.PlayerGui.ReactGameRewards.Frame.gameOver:FindFirstChild("content").Visible == true then
+                    game:GetService("TeleportService"):Teleport(3260590327, game.Players.LocalPlayer)
                 end
             end
         end)
     end)
-
-    task.spawn(function() 
-        game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(obj)
-            if obj.Name == "ErrorPrompt" and obj:FindFirstChild("MessageArea") and obj.MessageArea:FindFirstChild("ErrorFrame") then
-                tpLobby()
+    task.spawn(function()
+        game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(o)
+            if o.Name == "ErrorPrompt" and o:FindFirstChild("MessageArea") and o.MessageArea:FindFirstChild("ErrorFrame") then
+                game:GetService("TeleportService"):Teleport(3260590327, game.Players.LocalPlayer)
             end
-        end)
+        end) 
     end)
-
 elseif game.PlaceId == 3260590327 then
     task.spawn(function()
-        game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(obj)
-            if obj.Name == "ErrorPrompt" and obj:FindFirstChild("MessageArea") and obj.MessageArea:FindFirstChild("ErrorFrame") then
-                tpLobby()
+        game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(o)
+            if o.Name == "ErrorPrompt" and o:FindFirstChild("MessageArea") and o.MessageArea:FindFirstChild("ErrorFrame") then
+                game:GetService("TeleportService"):Teleport(3260590327, game.Players.LocalPlayer)
             end
-        end)
+        end) 
     end)
-
-    task.spawn(function()
-        print("Automatic reconnection after 5 minutes")
-        task.wait(300)
-        tpLobby()
-    end)
+    task.wait(300)
+    game:GetService("TeleportService"):Teleport(3260590327, game.Players.LocalPlayer)
 end
