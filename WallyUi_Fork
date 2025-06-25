@@ -1,9 +1,57 @@
 local library = {count = 0, queue = {}, callbacks = {}, rainbowtable = {}, toggled = true, binds = {}};
+
+---[[ --- modified devix7 --- ]]---
+
+-- clone links
+local gameClone = cloneref(game)
+local playersClone = cloneref(gameClone):GetService("Players")
+local userInputClone = cloneref(gameClone):GetService('UserInputService')
+local runServiceClone = cloneref(gameClone):GetService("RunService")
+local textServiceClone = cloneref(gameClone):GetService('TextService')
+local debrisClone = cloneref(gameClone):GetService('Debris')
+local coreGuiClone = cloneref(gameClone):GetService("CoreGui")
+
+local function makePrt()
+-- thx infiniteyield src
+    local function randomString()
+        local length = math.random(10,20)
+        local array = {}
+        for i = 1, length do
+            array[i] = string.char(math.random(32, 126))
+        end
+        return table.concat(array)
+    end
+    local PARENT = nil
+    local COREGUI = coreGuiClone
+    if get_hidden_gui or gethui then
+        local hiddenUI = get_hidden_gui or gethui
+        local Main = Instance.new("ScreenGui")
+        Main.Name = randomString()
+        Main.Parent = hiddenUI()
+        PARENT = Main
+    elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
+        local Main = Instance.new("ScreenGui")
+        Main.Name = randomString()
+        syn.protect_gui(Main)
+        Main.Parent = COREGUI
+        PARENT = Main
+    elseif COREGUI:FindFirstChild("RobloxGui") then
+        PARENT = COREGUI.RobloxGui
+    else
+        local Main = Instance.new("ScreenGui")
+        Main.Name = randomString()
+        Main.Parent = COREGUI
+        PARENT = Main
+    end
+    return PARENT
+end
+---[[ --- ]]---
+
 local defaults; do
     local dragger = {}; do
-        local mouse        = game:GetService("Players").LocalPlayer:GetMouse();
-        local inputService = game:GetService('UserInputService');
-        local heartbeat    = game:GetService("RunService").Heartbeat;
+        local mouse        = playersClone.LocalPlayer:GetMouse();
+        local inputService = userInputClone;
+        local heartbeat    = runServiceClone.Heartbeat;
         function dragger.new(frame)
             local s, event = pcall(function()
                 return frame.MouseEnter
@@ -33,7 +81,7 @@ local defaults; do
             end
         end
 
-        game:GetService('UserInputService').InputBegan:connect(function(key, gpe)
+        userInputClone.InputBegan:connect(function(key, gpe)
             if (not gpe) then
                 if key.KeyCode == Enum.KeyCode.RightControl then
                     library.toggled = not library.toggled;
@@ -173,7 +221,7 @@ local defaults; do
         end
         
         function types:Label(display,rainbow)
-            local v = game:GetService'TextService':GetTextSize(display, 18, Enum.Font.SourceSans, Vector2.new(math.huge, math.huge))
+            local v = textServiceClone:GetTextSize(display, 18, Enum.Font.SourceSans, Vector2.new(math.huge, math.huge))
             local object = library:Create('Frame', {
                 Size = UDim2.new(1, 0, 0, v.Y+5);
                 BackgroundTransparency  = 1;
@@ -532,7 +580,7 @@ local defaults; do
                 library.binding = true
 
                 button.Text = "..."
-                local a, b = game:GetService('UserInputService').InputBegan:wait();
+                local a, b = userInputClone.InputBegan:wait();
                 local name = tostring(a.KeyCode.Name);
                 local typeName = tostring(a.UserInputType.Name);
 
@@ -740,8 +788,8 @@ local defaults; do
                     if renderSteppedConnection then renderSteppedConnection:disconnect() end 
                     
 
-                    renderSteppedConnection = game:GetService('RunService').RenderStepped:connect(function()
-                        local mouse = game:GetService("UserInputService"):GetMouseLocation()
+                    renderSteppedConnection = runServiceClone.RenderStepped:connect(function()
+                        local mouse = userInputClone:GetMouseLocation()
                         local percent = (mouse.X - overlay.Container.AbsolutePosition.X) / (overlay.Container.AbsoluteSize.X)
                         percent = math.clamp(percent, 0, 1)
                         percent = tonumber(string.format("%.2f", percent))
@@ -778,7 +826,7 @@ local defaults; do
                 end)
 
                 mouseDownConnection = check:FindFirstChild(name).Container.Button.MouseButton1Down:connect(update)
-                mouseUpConnection   = game:GetService("UserInputService").InputEnded:connect(function(a, b)
+                mouseUpConnection   = userInputClone.InputEnded:connect(function(a, b)
                     if a.UserInputType == Enum.UserInputType.MouseButton1 and (mouseDownConnection.Connected) then
                         disconnect()
                     end
@@ -1021,7 +1069,7 @@ local defaults; do
                         Name = 'Selection';
                         Size = UDim2.new(1, 0, 1, 0);
                         Text = location[flag];
-                        TextColor3 = colors[v] or library.options.textcolor;
+                        TextColor3 = colors[location[flag]] or library.options.textcolor;
                         BackgroundTransparency = 1;
                         Font = library.options.font;
                         TextSize = library.options.fontsize;
@@ -1111,7 +1159,7 @@ local defaults; do
                         location[flag] = tostring(btn.Text);
                         callback(location[flag])
 
-                        game:GetService('Debris'):AddItem(container, 0)
+                        debrisClone:AddItem(container, 0)
                         input:disconnect();
                     end)
                 end
@@ -1119,7 +1167,7 @@ local defaults; do
                 container:TweenSize(goSize, 'Out', 'Quad', 0.15, true)
                 
                 local function isInGui(frame)
-                    local mloc = game:GetService('UserInputService'):GetMouseLocation();
+                    local mloc = userInputClone:GetMouseLocation();
                     local mouse = Vector2.new(mloc.X, mloc.Y - 36);
                     
                     local x1, x2 = frame.AbsolutePosition.X, frame.AbsolutePosition.X + frame.AbsoluteSize.X;
@@ -1128,15 +1176,15 @@ local defaults; do
                     return (mouse.X >= x1 and mouse.X <= x2) and (mouse.Y >= y1 and mouse.Y <= y2)
                 end
                 
-                input = game:GetService('UserInputService').InputBegan:connect(function(a)
+                input = userInputClone.InputBegan:connect(function(a)
                     if a.UserInputType == Enum.UserInputType.MouseButton1 and (not isInGui(container)) then
-                        check:FindFirstChild('dropdown_lbl'):WaitForChild('Selection').TextColor3 = colors[v] or library.options.textcolor
+                        check:FindFirstChild('dropdown_lbl'):WaitForChild('Selection').TextColor3 = colors[location[flag]] or library.options.textcolor
                         check:FindFirstChild('dropdown_lbl'):WaitForChild('Selection').Text       = location[flag];
 
                         container:TweenSize(UDim2.new(1, 0, 0, 0), 'In', 'Quad', 0.15, true)
                         wait(0.15)
 
-                        game:GetService('Debris'):AddItem(container, 0)
+                        debrisClone:AddItem(container, 0)
                         input:disconnect();
                     end
                 end)
@@ -1150,8 +1198,10 @@ local defaults; do
                     input:disconnect()
                 end)
                 check:WaitForChild('dropdown_lbl').Selection.Text = location[flag]
-                check:FindFirstChild('dropdown_lbl'):WaitForChild('Selection').TextColor3 = colors[v] or library.options.textcolor
-                game:GetService('Debris'):AddItem(container, 0)
+                check:FindFirstChild('dropdown_lbl'):WaitForChild('Selection').TextColor3 = colors[location[flag]] or library.options.textcolor
+                if container then
+                    debrisClone:AddItem(container, 0)
+                end
             end
 
             return {
@@ -1326,6 +1376,7 @@ local defaults; do
     
     function library:CreateWindow(name, options)
         if (not library.container) then
+            local parentPrt = makePrt()
             library.container = self:Create("ScreenGui", {
                 self:Create('Frame', {
                     Name = 'Container';
@@ -1334,7 +1385,7 @@ local defaults; do
                     BackgroundTransparency = 1;
                     Active = false;
                 });
-                Parent = game:GetService("Players").LocalPlayer.PlayerGui;
+                Parent = parentPrt;
             }):FindFirstChild('Container');
         end
         
@@ -1414,7 +1465,7 @@ local defaults; do
         end
     end
 
-    game:GetService("UserInputService").InputBegan:connect(function(input)
+    userInputClone.InputBegan:connect(function(input)
         if (not library.binding) then
             for idx, binds in next, library.binds do
                 local real_binding = binds.location[idx];
